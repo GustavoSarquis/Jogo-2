@@ -162,13 +162,14 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
     char cod;
     int objetivoX, objetivoY;
     int aleatorioX = 5, aleatorioY = 5;
-    int inimigoX = 10, inimigoY = 10;
+    int inimigoX = 15, inimigoY = 20;
     int NPCX, NPCY;
     int NPC2X, NPC2Y;
     int faloucomNPC = 0;
 
 //Mapa da Vila    
     if (mapNumber == 0){
+    	CPX = 2, CPY = 2;
         objetivoX = 8;
         objetivoY = 8;
         NPCX = 7;
@@ -291,6 +292,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 
 //Mapa 1	
     if (mapNumber == 1) {
+   	    CPX = 2, CPY = 2;
         objetivoX = 8;
         objetivoY = 8;
         inicializarMapa1();
@@ -318,18 +320,18 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
         	//Morte por espinhos
             if (map1[CPX][CPY]==2) {
                 system("cls");
-                printf("Você morreu!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...\n");
-                getch();
-                CPX = 1, CPY = 1;
+                CPX = 2, CPY = 2;
                 contador1++;   			
-				if (contador1%3 == 0 && contador1 != 0){
+				if (contador1%3 == 0 && contador1 != 0){	
                 printf("Você perdeu suas vidas!\n");
 				system("pause");	
                 contador1 = 0;
 				return 0;
 			}     
 				else{
+                system("cls");
+                printf("Você morreu!\n");
+                system("pause");
                 continue;  
 				}
             }
@@ -361,7 +363,8 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 
 //Mapa 2	
     if (mapNumber == 2) {
-        objetivoX = 13;
+   	    CPX = 9, CPY = 7;
+        objetivoX = 9;
         objetivoY = 13;
         inicializarMapa2();
                 map2[7][0] = 4;
@@ -404,20 +407,20 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
             else if (direcao == 2 && map2[aleatorioX - 1][aleatorioY] == 0) aleatorioX--;
             else if (direcao == 3 && map2[aleatorioX + 1][aleatorioY] == 0) aleatorioX++;
 
+			//Morte pelo X
             if (CPX == aleatorioX && CPY == aleatorioY) {
                 system("cls");
-                printf("Você foi pego!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...\n");
-                getch();
-                CPX = 7; CPY = 7;
+                CPX = 9; CPY = 7;
                 contador1++;
-   				if (contador1%3 == 0 && contador1 != 0){
+   				if (contador1%3 == 0 && contador1 != 0){	
                 printf("Você perdeu suas vidas!\n");
 				system("pause");	
                 contador1 = 0;
 				return 0;
 			}     
 				else{
+                printf("Você foi pego!\n");	
+                system("pause");		
                 continue;  
 				}
             }
@@ -425,10 +428,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
             //Morte por espinhos
             if (map2[CPX][CPY]==2) {
                 system("cls");
-                printf("Você morreu!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...\n");
-                getch();
-                CPX = 7; CPY = 7;
+                CPX = 9; CPY = 7;
                 contador1++;
    				if (contador1%3 == 0 && contador1 != 0){
                 printf("Você perdeu suas vidas!\n");
@@ -437,6 +437,8 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 				return 0;
 			}     
 				else{
+                printf("Você foi pego!\n");	
+                system("pause");		
                 continue;  
 				}
             }
@@ -468,8 +470,9 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 
 //Mapa 3
     if (mapNumber == 3) {
+   	    CPX = 5, CPY = 2;
         objetivoX = 3;
-        objetivoY = 17;
+        objetivoY = 30;
         inicializarMapa3();
         int contador = 0;
                 map3[7][0] = 4;
@@ -519,10 +522,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 			//Morte pelo X
             if (CPX == aleatorioX && CPY == aleatorioY) {
                 system("cls");
-                printf("Você foi pego!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...\n");
-                getch();
-                CPX = 5; CPY = 7;
+                CPX = 5; CPY = 2;
                 contador1++;
                	if (contador1%3 == 0 && contador1 != 0){
                 printf("Você perdeu suas vidas!\n");
@@ -531,6 +531,8 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 				return 0;
 			}     
 				else{
+                printf("Você foi pego!\n");
+                system("pause");
                 continue;  
 				}
             }
@@ -538,10 +540,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 			//Morte pelo Y
             if (CPX == inimigoX && CPY == inimigoY) {
                 system("cls");
-                printf("Você foi pego!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...\n");
-                getch();
-                CPX = 5; CPY = 7;
+                CPX = 5; CPY = 2;
                 contador1++;
    				if (contador1%3 == 0 && contador1 != 0){
                 printf("Você perdeu suas vidas!\n");
@@ -550,6 +549,8 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 				return 0;
 			}     
 				else{
+                printf("Você foi pego!\n");
+                system("pause");
                 continue;  
 				}
             }
@@ -575,10 +576,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
             //Morte por espinhos
             if (map3[CPX][CPY]==2) {
                 system("cls");
-                printf("Você morreu!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...\n");
-                getch();
-                CPX = 5; CPY = 7;
+                CPX = 5; CPY = 2;
                 contador1++;
    				if (contador1%3 == 0 && contador1 != 0){
                 printf("Você perdeu suas vidas!\n");
@@ -587,6 +585,8 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 				return 0;
 			}     
 				else{
+                printf("Você foi pego!\n");
+                system("pause");
                 continue;  
 				}
             }
@@ -618,6 +618,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 
 //Mapa da Vila	
     if (mapNumber == 4) {
+    	CPX = 2; CPY = 2;
         objetivoX = 8;
         objetivoY = 8;
         NPCX = 7;
@@ -716,13 +717,10 @@ int main() {
         	//Jogo
             case 1:
             	if(op == 1){	
-                if (jogarMapa(0, CPX, CPY)) {     	
+                if (jogarMapa(0, CPX, CPY)) {   	
                 if (jogarMapa(1, CPX, CPY)) {
-                  CPX = 7; CPY = 7;
                 if (jogarMapa(2, CPX, CPY)) {
-                  CPX = 37; CPY = 10;
                 if (jogarMapa(3, CPX, CPY)){
-                  	CPX = 3; CPY = 5;
                     jogarMapa(4, CPX, CPY);
 				  }
                }
