@@ -1,6 +1,6 @@
 Descrição Geral: 
 Você é um caçador de recompensas contratado pelo chefe de uma vila para recuperar um amuleto sagrado e um tesouro roubado por um monstro em uma masmorra perigosa. A jornada é dividida em mapas progressivos 
-com desafios diferentes, NPCs interativos e obstáculos mortais. Seu objetivo é sobreviver, coletar os itens e voltar à vila em segurança. O jogo é composto por 4 mapas, sendo 3 fases de progressão, e uma vila, a qual começamos o jogo e terminamos. O jogador possuí 3 vidas, ao zerar as vidas, o usuário volta para o menu. No desenvolvimento do jogo foi utilizado 5 bibliotecas:
+com desafios diferentes, NPCs interativos e obstáculos mortais. Seu objetivo é sobreviver, coletar os itens e voltar à vila em segurança. O jogo é composto por 4 mapas, sendo 3 fases de progressão, e uma vila, a qual começamos o jogo e terminamos. O jogador possuí 3 vidas, ao zerar as vidas, o usuário volta para o menu. No desenvolvimento do jogo foi utilizado 6 bibliotecas:
 - <stdio.h>
 - <stdlib.h>
 - <time.h>
@@ -53,3 +53,6 @@ O objetivo do mapa é fugir de um inimigo que se move aleatoriamente (X) e alcan
 
 4 Fase do Rpg (Mapa 3):
 Esta é a última fase da masmorra, onde está localizado o objetivo pricipal do jogador. A fim de zerar o jogo, o jogador precisa interagir com a chave, que nesta fase está junto com o tesouro e com o amuleto, assim pegando o objetivo e abrindo a porta para fugir do perigo. Ao mesmo tempo, nesta fase o mapa possui um tamanho de 40x40, alén de possuir espinhos, um inimigo que se move aleatoriamente, o teletransporte e o chefão final, que perssegue o usuário a todo momento. 
+
+5 Fase (Vila):
+Após  concluir a missão, o jogador volta praa vila e conversa com um simples aldeão e com o chefe da vila, o qual o parabeniza e pega o amuleto de volta. Após as interações, o  jogador finaliza o  jogo e aparece uma menssagem final.
