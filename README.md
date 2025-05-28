@@ -33,10 +33,10 @@ A movimentação do personagem é controlada pelo teclado, usando as teclas WASD
 
 Movimentação dos inimigos:
 -Inimigo que se move aleatoreamente(X): Foi utilizado a função rand, a qual, a cada ciclo, é esccolhido um numero de 0 a 3 de forma aleatória. Com isso é designado a movimentação do inimigo da seguinte forma:
-0 → Se move para cima 
-1 → Se move para baixo
-2 → Se move para esquerda
-3 → Se move para direita
+- 0 → Se move para cima 
+- 1 → Se move para baixo
+- 2 → Se move para esquerda
+- 3 → Se move para direita
 Além disso, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
 
 -Inimigo que persegue o jogador(Y): A cada 2 ciclos de jogo, ele calcula a direção mais próxima para alcançar o jogador, sendo dx a distância horizontal e dy a distância vertical. Se dx for maior que dy, ele se movimenta logo no eixo x e as mesmas limitações do mapa para o jogaador, como paredes e portas, servem para ele, caso o dy seja maior, ocorre a mesma coisa só que com o eixo y. Além disso, assim como o outro inimigo, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
