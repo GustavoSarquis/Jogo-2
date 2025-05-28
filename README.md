@@ -31,6 +31,16 @@ A movimentação do personagem é controlada pelo teclado, usando as teclas WASD
 - CPX++ → move para a direita.
 - CPX-- → move para a esquerda.
 
+Movimentação dos inimigos:
+-Inimigo que se move aleatoreamente(X): Foi utilizado a função rand, a qual, a cada ciclo, é esccolhido um numero de 0 a 3 de forma aleatória. Com isso é designado a movimentação do inimigo da seguinte forma:
+0 → Se move para cima 
+1 → Se move para baixo
+2 → Se move para esquerda
+3 → Se move para direita
+Além disso, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
+
+-Inimigo que persegue o jogador(Y): A cada 2 ciclos de jogo, ele calcula a direção mais próxima para alcançar o jogador, sendo dx a distância horizontal e dy a distância vertical. Se dx for maior que dy, ele se movimenta logo no eixo x e as mesmas limitações do mapa para o jogaador, como paredes e portas, servem para ele, caso o dy seja maior, ocorre a mesma coisa só que com o eixo y. Além disso, assim como o outro inimigo, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
+
 1 Fase do RPG (Vila):
 O momento inicial do jogo é o jogador chegando na vila, nessa primeira fase o usuário conversa com os dois NPCs, os quais são designados pelo caráter "P", o primeiro NPC introduz o enredo, já o segundo que é o chefe, dá os 
 detalhes da missão e o objetivo do joagador, após falar com os NPCs, o usuário vai até a chave, designada pelo caráter "@", o qual desbloqueia a passagem que antes estava fechada, após o jogador atravessar a porta, ele entra na masmorra e avança para a próxima fase.
@@ -38,5 +48,8 @@ detalhes da missão e o objetivo do joagador, após falar com os NPCs, o usuári
 2 Fase do Rpg (Mapa 1):
 O objetivo do mapa é atravessar o labirinto, evitar os espinhos (#) e pegar a chave (@), para abri as portas, caso o usuário toque nos espinhos um ponto de vida é descontado, ao zerar o jogador perde. Nessa fase, já existe a presença de um teletransporte, o mapa possuí um tamnho de 10x10.
 
-3 Fase do Rpg (Mapa  2):
-Fugir de um inimigo que se move aleatoriamente (X) e alcançar a chave, o mapa também apresenta  espinhos e teletransporte. Além disso, a fase possuí um botão "O" que tem uma função especial que aparecem mais espinhos no mapa, o tamanho do mapa é 20x20. Acerca do desenvolvimento do inimigo aleatório 
+3 Fase do Rpg (Mapa 2):
+O objetivo do mapa é fugir de um inimigo que se move aleatoriamente (X) e alcançar a chave, o mapa também apresenta  espinhos e teletransporte. Além disso, a fase possuí um botão "O" que tem uma função especial que aparecem mais espinhos no mapa, o tamanho do mapa é 20x20. 
+
+4 Fase do Rpg (Mapa 3):
+Esta é a última fase da masmorra, onde está localizado o objetivo pricipal do jogador. A fim de zerar o jogo, o jogador precisa interagir com a chave, que nesta fase está junto com o tesouro e com o amuleto, assim pegando o objetivo e abrindo a porta para fugir do perigo. Ao mesmo tempo, nesta fase o mapa possui um tamanho de 40x40, alén de possuir espinhos, um inimigo que se move aleatoriamente, o teletransporte e o chefão final, que perssegue o usuário a todo momento. 
