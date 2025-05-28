@@ -1,1 +1,755 @@
+//Biblioteccas utilizadas
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h>
+#include <conio.h>
+#include <locale.h>
 
+//Tamanho das matrizes
+int vila[10][10], map1[10][10], map2[20][20], map3[40][40];
+
+//Contador de vidas
+int contador1 = 0;
+
+//Função que atribui valores a matriz a vila
+void inicializarVila(){
+    for (int i = 0; i < 10; i++) {
+        vila[i][0] = vila[i][9] = 1;
+        vila[0][i] = vila[9][i] = 1;
+    }
+}
+
+//Função que atribui valores a matriz do mapa 1
+void inicializarMapa1() {
+    for (int i = 0; i < 10; i++) {
+        map1[i][0] = map1[i][9] = 1;
+        map1[0][i] = map1[9][i] = 1;
+        map1[5][1] = map1[5][2] = 2;
+        map1[5][3] = map1[5][6] = 2;
+		map1[5][7] = map1[5][8] = 2;  
+		map1[1][5] = map1[8][5] = 5;   
+    }
+}
+
+//Função que atribui valores a matriz do mapa 2
+void inicializarMapa2() {
+    for (int i = 0; i < 20; i++) {
+        map2[i][0] = map2[i][19] = 1;
+        map2[0][i] = map2[19][i] = 1;
+        map2[11][1] = map2[11][18] = 5;
+        map2[8][16] = 6;
+        //Primeiro quadrado
+        map2[5][1] = map2[5][2] = 2;
+        map2[5][3] = map2[5][4] = 2;
+        map2[1][5] = map2[2][5] = 2;
+        map2[3][5] = map2[4][5] = 2;
+        map2[5][5] = 2;
+        //Segundo quadrado
+		map2[14][5] = map2[15][5] = 2;
+        map2[16][5] = map2[17][5] = 2;
+        map2[18][5] = map2[14][1] = 2;
+        map2[14][2] = map2[14][3] = 2;
+        map2[14][4] = 2;
+        //Terceiro quadrado
+        map2[14][14] = map2[14][15] = 2;
+        map2[14][16] = map2[14][17] = 2;
+        map2[14][18] = map2[14][1] = 2;
+        map2[14][19] = map2[16][14] = 2;
+        map2[17][14] = map2[18][14] = 2;
+        //Quarto quadrado
+        map2[5][15] = map2[5][16] = 2;
+        map2[5][17] = map2[5][18] = 2;
+        map2[1][14] = map2[2][14] = 2;
+        map2[3][14] = map2[14][4] = 2;
+        map2[4][14] = map2[5][14] = 2;
+    }
+}
+
+//Função que atribui valores a matriz do mapa 3
+void inicializarMapa3() {
+	map3[17][1] = map3[17][38] = 5;
+    map3[8][9] = 6;
+    for (int i = 0; i < 40; i++) {
+        map3[i][0] = map3[i][39] = 1;
+        map3[0][i] = map3[39][i] = 1;
+    }
+    for (int j = 1; j < 38; j=j+2){
+    map3[j][j] = map3[j][39-j] = 2;
+	}
+}
+
+//Função que gera o mapa da vila
+void Vila(int CPX, int CPY, int objetivoX, int objetivoY, int NPCX, int NPCY, int NPC2X, int NPC2Y) {
+	printf("Vidas: %d\n", 3-contador1%3);
+    for (int y = 0; y < 10; y++) {
+        for (int x = 0; x < 10; x++) {
+            if (x == CPX && y == CPY) printf("&");
+            else if (x == objetivoX && y == objetivoY) printf("@");
+            else if (x == NPCX && y == NPCY) printf("P");
+            else if (x == NPC2X && y == NPC2Y) printf("P");
+			else if (vila[x][y] == 1) printf("*");
+		    else if (vila[x][y] == 3) printf("=");
+		    else if (vila[x][y] == 4) printf("D");
+		    else if (vila[x][y] == 5) printf (">");
+            else printf(" ");
+        }
+        printf("\n");
+    }
+}
+
+//Função que gera o mapa 1
+void Mapa1(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int aleatorioY, int inimigoX, int inimigoY) {
+	printf("Vidas: %d\n", 3-contador1%3);
+    for (int y = 0; y < 10; y++) {
+        for (int x = 0; x < 10; x++) {
+            if (x == CPX && y == CPY) printf("&");
+            else if (x == objetivoX && y == objetivoY) printf("@");
+            else if (map1[x][y] == 2) printf("#");
+            else if (map1[x][y] == 1) printf("*");
+            else if (map1[x][y] == 3) printf("=");
+            else if (map1[x][y] == 4) printf("D");
+            else if (map1[x][y] == 5) printf (">");
+            else printf(" ");
+        }
+        printf("\n");
+    }
+}
+
+//Função que gera o mapa 2
+void Mapa2(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int aleatorioY, int inimigoX, int inimigoY) {
+	printf("Vidas: %d\n", 3-contador1%3);
+    for (int y = 0; y < 20; y++) {
+        for (int x = 0; x < 20; x++) {
+            if (x == CPX && y == CPY) printf("&");
+            else if (x == objetivoX && y == objetivoY) printf("@");
+            else if (x == aleatorioX && y == aleatorioY) printf("X");
+            else if (map2[x][y] == 2) printf("#");
+            else if (map2[x][y] == 1) printf("*");
+            else if (map2[x][y] == 3) printf("=");
+            else if (map2[x][y] == 4) printf("D");
+		    else if (map2[x][y] == 5) printf (">");
+		    else if (map2[x][y] == 6) printf ("O");
+            else printf(" ");
+        }
+        printf("\n");
+    }
+}
+
+//Função que gera o mapa 3
+void Mapa3(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int aleatorioY, int inimigoX, int inimigoY) {
+    for (int y = 0; y < 40; y++) {
+        for (int x = 0; x < 40; x++) {
+            if (x == CPX && y == CPY) printf("&");
+            else if (x == objetivoX && y == objetivoY) printf("@");
+            else if (x == aleatorioX && y == aleatorioY) printf("X");
+            else if (x == inimigoX && y == inimigoY) printf("Y");
+            else if (map3[x][y] == 2) printf("#");
+            else if (map3[x][y] == 1) printf("*");
+            else if (map3[x][y] == 3) printf("=");
+            else if (map3[x][y] == 4) printf("D");  
+		    else if (map3[x][y] == 5) printf (">");
+		    else if (map3[x][y] == 6) printf ("O");
+            else printf(" ");
+        }   
+        printf("\n");
+    }
+    printf("Vidas: %d\n", 3-contador1%3);
+}
+
+//Função
+int jogarMapa(int mapNumber, int CPX, int CPY) {
+    char cod;
+    int objetivoX, objetivoY;
+    int aleatorioX = 5, aleatorioY = 5;
+    int inimigoX = 10, inimigoY = 10;
+    int NPCX, NPCY;
+    int NPC2X, NPC2Y;
+    int faloucomNPC = 0;
+
+//Mapa da Vila    
+    if (mapNumber == 0){
+        objetivoX = 8;
+        objetivoY = 8;
+        NPCX = 7;
+        NPCY = 3;
+        NPC2X = 1;
+        NPC2Y = 8;
+        inicializarVila();
+                vila[1][0] = 4;
+                vila[2][0] = 4;
+                vila[3][0] = 4;
+        while (1) {
+            system("cls");
+            Vila(CPX, CPY, objetivoX, objetivoY, NPCX, NPCY, NPC2X, NPC2Y);
+            //Movimento do personagem
+            if (kbhit()) {
+                cod = getch();
+                if (cod == 's' && vila[CPX][CPY + 1] != 1 && vila[CPX][CPY + 1] != 4) CPY++;
+                else if (cod == 'w' && vila[CPX][CPY - 1] != 1 && vila[CPX][CPY - 1] != 4) CPY--;
+                else if (cod == 'a' && vila[CPX - 1][CPY] != 1 && vila[CPX - 1][CPY] != 4) CPX--;
+                else if (cod == 'd' && vila[CPX + 1][CPY] != 1 && vila[CPX + 1][CPY] != 4) CPX++;
+            }
+       
+			//Pegar a chave        
+			if (CPX == objetivoX && CPY == objetivoY) {
+      	        printf("Para interagir com a chave, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){	
+                vila[1][0] = 3;
+                vila[2][0] = 3;
+                vila[3][0] = 3;
+                CPX--;
+				}
+            }  
+			
+			//Condição de vitoria
+			if(vila[CPX][CPY] == 3){
+                system("cls");
+                printf("Você venceu a VILA!\n");
+                printf("Pressione qualquer tecla para continuar...\n");
+                getch();
+                return 1;
+			}                
+            
+            //Fala do NPC 
+            while (CPX == NPCX && CPY == NPCY) {
+            	printf("Para interagir com o aldeão, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){
+				printf("Aperte qualquer tecla para pular as conversas\n");
+				getch();
+				printf("Aldeão:Olá viajante!\nAldeão:O que te traz para a nossa humilde vila.\n");
+				getch();
+				printf("Jogador:Eu sou o caçador de recompensas contrado pelo chefe da vila.\n");
+				getch();
+				printf("Aldeão:Ótimo!, ele está esperando por você no salão da vila.\n");
+                printf("Pressione qualquer tecla para continuar...\n");
+                getch();
+                faloucomNPC = 1;
+                CPX++;
+                CPY++;
+				}
+				else if(cod!='i'){
+					CPX--;
+				}
+			}
+			
+			 //Fala do NPC2  		
+			 while (CPX == NPC2X && CPY == NPC2Y) {
+            	if(faloucomNPC){
+				printf("Para interagir com o chefe, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){
+				printf("Aperte qualquer tecla para pular as conversas\n");
+				getch();
+				printf("Chefe:Bom dia caçador!\nChefe:Você está preparado para sua missão?\n");
+				getch();
+				printf("Jogador:Com certeza, pagando bem, topo qualquer coisa.\n");
+				getch();
+				printf("Chefe:HaHaHa!, vou te dar algumas intruções.\n");
+					getch();
+				printf("Chefe:Sua missão é recuperar o tesouro que o monstro nos roubou, uma boa quantidade de moedas, que podem ficar com você.\n");
+					getch();
+				printf("Chefe:Além disso, perdemos também, um amuleto muito importante para a religião do meu povo, siginifica paz e segurança.\n");
+					getch();
+				printf("Chefe:Se você voltar com vida, todas as moedas são suas e só queremos o amuleto de volta.\n");
+					getch();
+				printf("Chefe:A masmorra que o monstro vive possuí 3 camadas, A 1 camada você só precisa achar a chave que te leva para a próxima camada.\n");
+					getch();
+				printf("Chefe:Já na camada 2, você deve fugir de um dos capangas do monstro, mas pode ficar tranquilo que ele é cego, então só evita a direção dele.\n");
+					getch();
+				printf("Chefe:Por fim, onde todos que enviamos morrem, a última camada é onde o monstro fica, além de ter mais um capanga cego.\n");
+					getch();
+				printf("Chefe:Ao pegar o tesouro, você pega a chave e foge o mais ráapido possível da masmorra.\n");
+					getch();
+				printf("Chefe:Entendeu?\n");
+					getch();
+				printf("Jogador: Muita coisa pra assimilar, mas acho que entendi.\n");
+					getch();
+				printf("Chefe:Ótimo, então pode ir, boa sorte.\n");
+					getch();
+                printf("Pressione qualquer tecla para continuar...\n");
+                getch();
+                CPY--;
+				}
+				else if(cod!='i'){
+					CPY--;
+				}
+				}
+				else {
+					printf("Primeiramente, fale com o outro aldeão.\n");
+					printf("Pressione qualquer tecla para continuar...\n");
+					getch();
+					CPY--;
+				}
+            }
+            Sleep(100);
+			           
+	}
+	}
+
+//Mapa 1	
+    if (mapNumber == 1) {
+        objetivoX = 8;
+        objetivoY = 8;
+        inicializarMapa1();
+                map1[1][0] = 4;
+                map1[2][0] = 4;
+                map1[3][0] = 4;
+        while (1) {
+            system("cls");
+            Mapa1(CPX, CPY, objetivoX, objetivoY, aleatorioX, aleatorioY, inimigoX, inimigoY);
+            //Movimento do personagem
+            if (kbhit()) {
+                cod = getch();
+                if (cod == 's' && map1[CPX][CPY + 1] != 1 && map1[CPX][CPY + 1] != 4) CPY++;
+                else if (cod == 'w' && map1[CPX][CPY - 1] != 1 && map1[CPX][CPY - 1] != 4) CPY--;
+                else if (cod == 'a' && map1[CPX - 1][CPY] != 1 && map1[CPX - 1][CPY] != 4) CPX--;
+                else if (cod == 'd' && map1[CPX + 1][CPY] != 1 && map1[CPX + 1][CPY] != 4) CPX++;
+            }
+        
+			//Teleporte        
+        	if (map1[CPX][CPY]==5){
+				CPX = 9 - CPX;
+				CPY--;
+			}
+        
+        	//Morte por espinhos
+            if (map1[CPX][CPY]==2) {
+                system("cls");
+                printf("Você morreu!\n");
+                printf("Pressione qualquer tecla para voltar ao menu...\n");
+                getch();
+                CPX = 1, CPY = 1;
+                contador1++;   			
+				if (contador1%3 == 0 && contador1 != 0){
+                printf("Você perdeu suas vidas!\n");
+				system("pause");	
+                contador1 = 0;
+				return 0;
+			}     
+				else{
+                continue;  
+				}
+            }
+
+			//Pegar a chave 
+ 			if (CPX == objetivoX && CPY == objetivoY) {
+  	            printf("Para interagir com a chave, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){	
+                map1[1][0] = 3;
+                map1[2][0] = 3;
+                map1[3][0] = 3;
+                CPX--;
+				}
+            }  
+            
+            //Condição de vitoria
+  			if(map1[CPX][CPY] == 3){
+                system("cls");
+                printf("Você venceu o MAPA 1!\n");
+                printf("Pressione qualquer tecla para continuar...\n");
+                getch();
+                return 1;
+			}        
+			   
+            Sleep(200);
+        }
+    }
+
+//Mapa 2	
+    if (mapNumber == 2) {
+        objetivoX = 13;
+        objetivoY = 13;
+        inicializarMapa2();
+                map2[7][0] = 4;
+                map2[8][0] = 4;
+                map2[9][0] = 4;
+        while (1) {
+            system("cls");
+            Mapa2(CPX, CPY, objetivoX, objetivoY, aleatorioX, aleatorioY, inimigoX, inimigoY);
+            //Movimento do personagem
+            if (kbhit()) {
+                cod = getch();
+                if (cod == 's' && map2[CPX][CPY + 1] != 1 && map2[CPX][CPY + 1] != 4) CPY++;
+                else if (cod == 'w' && map2[CPX][CPY - 1] != 1 && map2[CPX][CPY - 1] != 4) CPY--;
+                else if (cod == 'a' && map2[CPX - 1][CPY] != 1 && map2[CPX - 1][CPY] != 4) CPX--;
+                else if (cod == 'd' && map2[CPX + 1][CPY] != 1 && map2[CPX + 1][CPY] != 4) CPX++;
+            }
+        	
+        	//Teleporte
+        	if (map2[CPX][CPY]==5){
+				CPY = 19 - CPY;
+				CPX++;
+			}
+			
+			//Botão especial
+       	    if (map2[CPX][CPY]==6){
+                printf("Para interagir com o botao, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){	
+                for (int j = 1; j < 19; j=j+2){
+                map2[j][j] = map2[j][19-j] = 2;
+                }
+                CPX--;
+				}
+			}
+			
+			//Movimento de X
+            int direcao = rand() % 4;
+            if (direcao == 0 && map2[aleatorioX][aleatorioY - 1] == 0) aleatorioY--;
+            else if (direcao == 1 && map2[aleatorioX][aleatorioY + 1] == 0) aleatorioY++;
+            else if (direcao == 2 && map2[aleatorioX - 1][aleatorioY] == 0) aleatorioX--;
+            else if (direcao == 3 && map2[aleatorioX + 1][aleatorioY] == 0) aleatorioX++;
+
+            if (CPX == aleatorioX && CPY == aleatorioY) {
+                system("cls");
+                printf("Você foi pego!\n");
+                printf("Pressione qualquer tecla para voltar ao menu...\n");
+                getch();
+                CPX = 7; CPY = 7;
+                contador1++;
+   				if (contador1%3 == 0 && contador1 != 0){
+                printf("Você perdeu suas vidas!\n");
+				system("pause");	
+                contador1 = 0;
+				return 0;
+			}     
+				else{
+                continue;  
+				}
+            }
+            
+            //Morte por espinhos
+            if (map2[CPX][CPY]==2) {
+                system("cls");
+                printf("Você morreu!\n");
+                printf("Pressione qualquer tecla para voltar ao menu...\n");
+                getch();
+                CPX = 7; CPY = 7;
+                contador1++;
+   				if (contador1%3 == 0 && contador1 != 0){
+                printf("Você perdeu suas vidas!\n");
+				system("pause");	
+                contador1 = 0;
+				return 0;
+			}     
+				else{
+                continue;  
+				}
+            }
+
+			//Pegar a chave
+  			if (CPX == objetivoX && CPY == objetivoY) {
+	            printf("Para interagir com a chave, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){	
+                map2[7][0] = 3;
+                map2[8][0] = 3;
+                map2[9][0] = 3;
+                CPX--;
+				}
+            }  
+            
+            //Condição de vitoria
+  			if(map2[CPX][CPY] == 3){
+                system("cls");
+                printf("Você venceu o MAPA 2!\n");
+                printf("Pressione qualquer tecla para continuar...\n");
+                getch();
+                return 1;
+			}             
+
+            Sleep(100);
+        }
+    }
+
+//Mapa 3
+    if (mapNumber == 3) {
+        objetivoX = 3;
+        objetivoY = 17;
+        inicializarMapa3();
+        int contador = 0;
+                map3[7][0] = 4;
+                map3[8][0] = 4;
+                map3[9][0] = 4;
+        printf("Vidas: %d\n", 3-contador1%3);        
+        while (1) {
+            system("cls");
+            Mapa3(CPX, CPY, objetivoX, objetivoY, aleatorioX, aleatorioY, inimigoX, inimigoY);
+            //Movimento do personagem
+            if (kbhit()) {
+                cod = getch();
+                if (cod == 's' && map3[CPX][CPY + 1] != 1 && map3[CPX][CPY + 1] != 4) CPY++;
+                else if (cod == 'w' && map3[CPX][CPY - 1] != 1 && map3[CPX][CPY - 1] != 4) CPY--;
+                else if (cod == 'a' && map3[CPX - 1][CPY] != 1 && map3[CPX - 1][CPY] != 4) CPX--;
+                else if (cod == 'd' && map3[CPX + 1][CPY] != 1 && map3[CPX + 1][CPY] != 4) CPX++;
+            }
+
+			//Movimento de X  		
+            int direcao = rand() % 4;
+            if (direcao == 0 && map3[aleatorioX][aleatorioY - 1] == 0) aleatorioY--;
+            else if (direcao == 1 && map3[aleatorioX][aleatorioY + 1] == 0) aleatorioY++;
+            else if (direcao == 2 && map3[aleatorioX - 1][aleatorioY] == 0) aleatorioX--;
+            else if (direcao == 3 && map3[aleatorioX + 1][aleatorioY] == 0) aleatorioX++;
+            
+            
+            //Movimento de Y
+            contador++;
+            if (contador % 2 == 0) {  
+			int dx = CPX - inimigoX;
+            int dy = CPY - inimigoY;
+
+            if (abs(dx) > abs(dy)) {
+            if (dx > 0 && map3[inimigoX + 1][inimigoY] == 0) inimigoX++;
+            else if (dx < 0 && map3[inimigoX - 1][inimigoY] == 0) inimigoX--;
+            else if (dy > 0 && map3[inimigoX][inimigoY + 1] == 0) inimigoY++;
+            else if (dy < 0 && map3[inimigoX][inimigoY - 1] == 0) inimigoY--;
+            } else {
+            if (dy > 0 && map3[inimigoX][inimigoY + 1] == 0) inimigoY++;
+            else if (dy < 0 && map3[inimigoX][inimigoY - 1] == 0) inimigoY--;
+            else if (dx > 0 && map3[inimigoX + 1][inimigoY] == 0) inimigoX++;
+            else if (dx < 0 && map3[inimigoX - 1][inimigoY] == 0) inimigoX--;
+            }
+			}
+		
+
+			//Morte pelo X
+            if (CPX == aleatorioX && CPY == aleatorioY) {
+                system("cls");
+                printf("Você foi pego!\n");
+                printf("Pressione qualquer tecla para voltar ao menu...\n");
+                getch();
+                CPX = 5; CPY = 7;
+                contador1++;
+               	if (contador1%3 == 0 && contador1 != 0){
+                printf("Você perdeu suas vidas!\n");
+				system("pause");	
+                contador1 = 0;
+				return 0;
+			}     
+				else{
+                continue;  
+				}
+            }
+
+			//Morte pelo Y
+            if (CPX == inimigoX && CPY == inimigoY) {
+                system("cls");
+                printf("Você foi pego!\n");
+                printf("Pressione qualquer tecla para voltar ao menu...\n");
+                getch();
+                CPX = 5; CPY = 7;
+                contador1++;
+   				if (contador1%3 == 0 && contador1 != 0){
+                printf("Você perdeu suas vidas!\n");
+				system("pause");	
+                contador1 = 0;
+				return 0;
+			}     
+				else{
+                continue;  
+				}
+            }
+            
+            //Espinhos
+      	    if (map3[CPX][CPY]==5){
+				CPY = 39 - CPY;
+				CPX++;
+			}
+			
+			//Botão especial
+      	    if (map3[CPX][CPY]==6){
+                printf("Para interagir com o botao, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){	
+                for (int j = 1; j < 39; j=j+2){
+                map3[20][j] = map3[j][20] = 2;
+                }
+                CPX--;
+				}
+			}
+            
+            //Morte por espinhos
+            if (map3[CPX][CPY]==2) {
+                system("cls");
+                printf("Você morreu!\n");
+                printf("Pressione qualquer tecla para voltar ao menu...\n");
+                getch();
+                CPX = 5; CPY = 7;
+                contador1++;
+   				if (contador1%3 == 0 && contador1 != 0){
+                printf("Você perdeu suas vidas!\n");
+				system("pause");	
+                contador1 = 0;
+				return 0;
+			}     
+				else{
+                continue;  
+				}
+            }
+
+			//Pegar a chave
+  			if (CPX == objetivoX && CPY == objetivoY) {
+	            printf("Para interagir com a chave, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){	
+                map3[7][0] = 3;
+                map3[8][0] = 3;
+                map3[9][0] = 3;
+                CPX--;
+				}
+            }  
+            
+            //Condição de vitoria
+  			if(map3[CPX][CPY] == 3){
+                system("cls");
+                printf("Você venceu o MAPA 3!\n");
+                printf("Pressione qualquer tecla para continuar...\n");
+                getch();
+                return 1;
+			}      
+			        
+            Sleep(50);
+        }
+    }
+
+//Mapa da Vila	
+    if (mapNumber == 4) {
+        objetivoX = 8;
+        objetivoY = 8;
+        NPCX = 7;
+        NPCY = 3;
+        NPC2X = 1;
+        NPC2Y = 8;
+        inicializarVila();
+                while(1){
+    	        system("cls");
+                Vila(CPX, CPY, objetivoX, objetivoY, NPCX, NPCY, NPC2X, NPC2Y);
+                
+            //Movimento do personagem    
+            if (kbhit()) {
+                cod = getch();
+                if (cod == 's' && vila[CPX][CPY + 1] == 0) CPY++;
+                else if (cod == 'w' && vila[CPX][CPY - 1] == 0) CPY--;
+                else if (cod == 'a' && vila[CPX - 1][CPY] == 0) CPX--;
+                else if (cod == 'd' && vila[CPX + 1][CPY] == 0) CPX++;
+            }
+        
+        	//Condição de vitoria
+            if (CPX == objetivoX && CPY == objetivoY) {
+                system("cls");
+                printf("Parabéns Caçador, você é um verdadeiro herói!!!\n");
+                printf("Pressione qualquer tecla para sair do jogo\n");
+                getch();
+                contador1 = 0;
+                return 0;
+            }
+            
+            //Fala do NPC
+            while (CPX == NPCX && CPY == NPCY) {
+            	printf("Para interagir com o aldeão, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){
+				printf("Aperte qualquer tecla para pular as conversas\n");
+				getch();
+				printf("Aldeão:Parabéns viajante,somos muito gratos.\n");
+				getch();
+				printf("Jogador:De nada, qualquer coisa só me chamar.\n");
+				getch();
+                CPX++;
+                CPY++;
+				}
+				else if(cod!='i'){
+					CPX++;
+				}
+			}
+		 
+		    //Fala do NPC2
+            while (CPX == NPC2X && CPY == NPC2Y) {
+            	printf("Para interagir com o chefe, digite a tecla i, caso o contrario, pressione outra tecla\n");
+				cod = getch();
+				if(cod == 'i'){
+				printf("Aperte qualquer tecla para pular as conversas\n");
+				getch();
+				printf("Chefe:Graças a Deus você voltou com vida, vamos fazer uma festa comemorando sua volta e a data de hoje virará feriado na nossa vila.\n");
+				getch();
+				printf("Jogador:Egua, to cheio de moral mesmo, muito obrigado por tudo isso, mas não ficarei para a festa, tenho outra missão pra fazer.\n");
+				getch();
+				printf("Chefe:Uma pena!, boa sorte na sua próxima missão, a vila sempre vai estar de portas abertas, pode ficar com as moedas e me entregue o amuleto\n");
+				getch();
+				printf("Jogadro:Aqui está!\nAté a próxima.\n");
+                CPX++;
+                CPY++;
+				}
+					else if(cod!='i'){
+					CPX++;
+				}
+				}
+             Sleep(50);
+            }
+	}
+	   return 0;   
+}
+
+int main() {
+    setlocale(LC_ALL, "Portuguese"); 
+	int op;
+    int CPX = 1, CPY = 1;
+    int contador1;
+    srand(time(NULL));
+    
+    //Menu
+    while (1) {
+        system("cls");
+        printf("***********\n");
+        printf("**  RPG  **\n");
+        printf("***********\n\n");
+        printf("1 -> Jogar\n");
+        printf("2 -> Creditos\n");
+        printf("3 -> Sair\n");
+        scanf("%d", &op);
+
+        switch (op) {
+        	//Jogo
+            case 1:
+            	if(op == 1){	
+                if (jogarMapa(0, CPX, CPY)) {     	
+                if (jogarMapa(1, CPX, CPY)) {
+                  CPX = 7; CPY = 7;
+                if (jogarMapa(2, CPX, CPY)) {
+                  CPX = 37; CPY = 10;
+                if (jogarMapa(3, CPX, CPY)){
+                  	CPX = 3; CPY = 5;
+                    jogarMapa(4, CPX, CPY);
+				  }
+               }
+        }
+        }
+        }    
+                break;
+            
+			// Créditos
+            case 2:
+                system("cls");
+                printf("Creditos:\n");
+                printf("Gustavo Sarquis\nPedro Oliveira\n");
+                printf("Pressione qualquer tecla para voltar ao menu\n");
+                getch();
+                break;
+            
+			//Saída do Jogo
+            case 3:
+                printf("Saindo do jogo...\n");
+                return 0;
+
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+                break;
+        }
+    }
+
+    return 0;
+}
