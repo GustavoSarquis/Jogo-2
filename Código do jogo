@@ -137,13 +137,13 @@ void Mapa2(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int a
 }
 
 //Função que gera o mapa 3
-void Mapa3(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int aleatorioY, int inimigoX, int inimigoY) {
+void Mapa3(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int aleatorioY, int inimigoX, int inimigoV) {
     for (int y = 0; y < 40; y++) {
         for (int x = 0; x < 40; x++) {
             if (x == CPX && y == CPY) printf("&");
             else if (x == objetivoX && y == objetivoY) printf("@");
             else if (x == aleatorioX && y == aleatorioY) printf("X");
-            else if (x == inimigoX && y == inimigoY) printf("Y");
+            else if (x == inimigoX && y == inimigoV) printf("V");
             else if (map3[x][y] == 2) printf("#");
             else if (map3[x][y] == 1) printf("*");
             else if (map3[x][y] == 3) printf("=");
