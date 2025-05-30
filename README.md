@@ -39,7 +39,7 @@ Movimentação dos inimigos:
 - 3 → Se move para direita
 Além disso, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
 
--Inimigo que persegue o jogador(Y): A cada 2 ciclos de jogo, ele calcula a direção mais próxima para alcançar o jogador, sendo dx a distância horizontal e dy a distância vertical. Se dx for maior que dy, ele se movimenta logo no eixo x e as mesmas limitações do mapa para o jogaador, como paredes e portas, servem para ele, caso o dy seja maior, ocorre a mesma coisa só que com o eixo y. Além disso, assim como o outro inimigo, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
+-Inimigo que persegue o jogador(V): A cada 2 ciclos de jogo, ele calcula a direção mais próxima para alcançar o jogador, sendo dx a distância horizontal e dy a distância vertical. Se dx for maior que dy, ele se movimenta logo no eixo x e as mesmas limitações do mapa para o jogaador, como paredes e portas, servem para ele, caso o dy seja maior, ocorre a mesma coisa só que com o eixo y. Além disso, assim como o outro inimigo, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
 
 1 Fase do RPG (Vila):
 O momento inicial do jogo é o jogador chegando na vila, nessa primeira fase o usuário conversa com os dois NPCs, os quais são designados pelo caráter "P", o primeiro NPC introduz o enredo, já o segundo que é o chefe, dá os 
@@ -56,3 +56,6 @@ Esta é a última fase da masmorra, onde está localizado o objetivo pricipal do
 
 5 Fase (Vila):
 Após  concluir a missão, o jogador volta praa vila e conversa com um simples aldeão e com o chefe da vila, o qual o parabeniza e pega o amuleto de volta. Após as interações, o  jogador finaliza o  jogo e aparece uma menssagem final.
+
+Referências:
+- DAMAS,Luís. Linguagem C. 10.ed.Rio de Janeiro:LTC,2007.
