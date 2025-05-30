@@ -1,3 +1,7 @@
+#Integrantes:
+-Gustavo Sarquis
+-Pedro Henrique
+
 #Descrição Geral: 
 Você é um caçador de recompensas contratado pelo chefe de uma vila para recuperar um amuleto sagrado e um tesouro roubado por um monstro em uma masmorra perigosa. A jornada é dividida em mapas progressivos 
 com desafios diferentes, NPCs interativos e obstáculos mortais. Seu objetivo é sobreviver, coletar os itens e voltar à vila em segurança. O jogo é composto por 4 mapas, sendo 3 fases de progressão, e uma vila, a qual começamos o jogo e terminamos. O jogador possuí 3 vidas, ao zerar as vidas, o usuário volta para o menu. No desenvolvimento do jogo foi utilizado 6 bibliotecas:
