@@ -137,13 +137,13 @@ void Mapa2(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int a
 }
 
 //Função que gera o mapa 3
-void Mapa3(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int aleatorioY, int inimigoX, int inimigoV) {
+void Mapa3(int CPX, int CPY, int objetivoX, int objetivoY, int aleatorioX, int aleatorioY, int inimigoX, int inimigoY) {
     for (int y = 0; y < 40; y++) {
         for (int x = 0; x < 40; x++) {
             if (x == CPX && y == CPY) printf("&");
             else if (x == objetivoX && y == objetivoY) printf("@");
             else if (x == aleatorioX && y == aleatorioY) printf("X");
-            else if (x == inimigoX && y == inimigoV) printf("V");
+            else if (x == inimigoX && y == inimigoY) printf("V");
             else if (map3[x][y] == 2) printf("#");
             else if (map3[x][y] == 1) printf("*");
             else if (map3[x][y] == 3) printf("=");
@@ -473,6 +473,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
    	    CPX = 5, CPY = 2;
         objetivoX = 3;
         objetivoY = 30;
+        aleatorioX = 20, aleatorioY = 23;
         inicializarMapa3();
         int contador = 0;
                 map3[7][0] = 4;
@@ -623,8 +624,8 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
         objetivoY = 8;
         NPCX = 7;
         NPCY = 3;
-        NPC2X = 1;
-        NPC2Y = 8;
+        NPC2X = 3;
+        NPC2Y = 7;
         inicializarVila();
                 while(1){
     	        system("cls");
@@ -664,7 +665,7 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
                 CPY++;
 				}
 				else if(cod!='i'){
-					CPX++;
+					CPX--;
 				}
 			}
 		 
@@ -682,11 +683,11 @@ int jogarMapa(int mapNumber, int CPX, int CPY) {
 				printf("Chefe:Uma pena!, boa sorte na sua próxima missão, a vila sempre vai estar de portas abertas, pode ficar com as moedas e me entregue o amuleto\n");
 				getch();
 				printf("Jogadro:Aqui está!\nAté a próxima.\n");
-                CPX++;
-                CPY++;
+                CPX--;
+                CPY--;
 				}
 					else if(cod!='i'){
-					CPX++;
+					CPX--;
 				}
 				}
              Sleep(50);
