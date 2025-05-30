@@ -1,4 +1,4 @@
-Descrição Geral: 
+#Descrição Geral: 
 Você é um caçador de recompensas contratado pelo chefe de uma vila para recuperar um amuleto sagrado e um tesouro roubado por um monstro em uma masmorra perigosa. A jornada é dividida em mapas progressivos 
 com desafios diferentes, NPCs interativos e obstáculos mortais. Seu objetivo é sobreviver, coletar os itens e voltar à vila em segurança. O jogo é composto por 4 mapas, sendo 3 fases de progressão, e uma vila, a qual começamos o jogo e terminamos. O jogador possuí 3 vidas, ao zerar as vidas, o usuário volta para o menu. No desenvolvimento do jogo foi utilizado 6 bibliotecas:
 - <stdio.h>
@@ -41,6 +41,7 @@ Além disso, ao jogaador dividir a coordenada com o monstro, é descontado um po
 
 -Inimigo que persegue o jogador(V): A cada 2 ciclos de jogo, ele calcula a direção mais próxima para alcançar o jogador, sendo dx a distância horizontal e dy a distância vertical. Se dx for maior que dy, ele se movimenta logo no eixo x e as mesmas limitações do mapa para o jogaador, como paredes e portas, servem para ele, caso o dy seja maior, ocorre a mesma coisa só que com o eixo y. Além disso, assim como o outro inimigo, ao jogaador dividir a coordenada com o monstro, é descontado um ponto de vida do usuário.
 
+#Fases:
 1 Fase do RPG (Vila):
 O momento inicial do jogo é o jogador chegando na vila, nessa primeira fase o usuário conversa com os dois NPCs, os quais são designados pelo caráter "P", o primeiro NPC introduz o enredo, já o segundo que é o chefe, dá os 
 detalhes da missão e o objetivo do joagador, após falar com os NPCs, o usuário vai até a chave, designada pelo caráter "@", o qual desbloqueia a passagem que antes estava fechada, após o jogador atravessar a porta, ele entra na masmorra e avança para a próxima fase.
@@ -57,5 +58,5 @@ Esta é a última fase da masmorra, onde está localizado o objetivo pricipal do
 5 Fase (Vila):
 Após  concluir a missão, o jogador volta praa vila e conversa com um simples aldeão e com o chefe da vila, o qual o parabeniza e pega o amuleto de volta. Após as interações, o  jogador finaliza o  jogo e aparece uma menssagem final.
 
-Referências:
+#Referências:
 - DAMAS,Luís. Linguagem C. 10.ed.Rio de Janeiro:LTC,2007.
